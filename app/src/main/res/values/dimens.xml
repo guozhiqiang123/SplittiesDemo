@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!--覆盖BottomNavigationView icon和label之间的间距-->
+    <dimen name="design_bottom_navigation_margin" tools:override="true">5dp</dimen>
+    <!--覆盖BottomNavigationView的默认高度，默认是56dp-->
+    <!--    <dimen name="design_bottom_navigation_height" tools:override="true">84dp</dimen>-->
+
+</resources>

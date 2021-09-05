@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_home"
+        android:enabled="true"
+        android:icon="@drawable/baseline_cottage_24"
+        android:title="@string/title_home"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_widgets"
+        android:enabled="true"
+        android:icon="@drawable/baseline_handyman_24"
+        android:title="@string/title_widgets"
+        app:showAsAction="ifRoom"/>
+    <item
+        android:id="@+id/action_anim"
+        android:enabled="true"
+        android:icon="@drawable/baseline_play_arrow_24"
+        android:title="@string/title_anim"
+        app:showAsAction="ifRoom"/>
+    <item
+        android:id="@+id/action_demo_ui"
+        android:enabled="true"
+        android:icon="@drawable/baseline_laptop_windows_24"
+        android:title="@string/title_demo_ui"
+        app:showAsAction="ifRoom"/>
+    <item
+        android:id="@+id/action_template"
+        android:enabled="true"
+        android:icon="@drawable/baseline_layers_24"
+        android:title="@string/title_template"
+        app:showAsAction="ifRoom"/>
+</menu>

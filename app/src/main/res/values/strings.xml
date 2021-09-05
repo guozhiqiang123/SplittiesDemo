@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">SplittiesDemo</string>
+    <string name="hello_world">Hello World!!!</string>
+    <string name="title_home">Home</string>
+    <string name="title_widgets">Widgets</string>
+    <string name="title_anim">Anim</string>
+    <string name="title_demo_ui">DemoUi</string>
+    <string name="title_template">Template</string>
+    <string name="menu_dark_light">DarkLight</string>
+    <string name="menu_palette">Palette</string>
+</resources>

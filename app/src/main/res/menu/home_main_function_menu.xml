@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_dark_light"
+        android:icon="@drawable/baseline_brightness_4_24"
+        android:title="@string/menu_dark_light"
+        app:showAsAction="ifRoom"
+        app:iconTint="@color/white"/>
+    <item
+        android:id="@+id/action_palette"
+        android:icon="@drawable/baseline_palette_24"
+        android:title="@string/menu_palette"
+        app:showAsAction="ifRoom"
+        app:iconTint="@color/white"/>
+</menu>
