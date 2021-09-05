@@ -10,10 +10,9 @@ import splitties.views.dsl.constraintlayout.lParams
 import splitties.views.dsl.core.*
 
 /**
- *company：成都标学科技有限公司
  *date：2021/9/5 下午8:25
  *coder：gzq
- *email：guozhiqiang@zlketang.com
+ *email：774550196@qq.com
  *description: Home的主页面
  */
 

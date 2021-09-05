@@ -10,7 +10,7 @@ import splitties.views.dsl.core.setContentView
 
 class MainActivity : AppCompatActivity() {
 
-    private val viewModel = viewModels<HelloWorldVM>()
+    private val vm by viewModels<HelloWorldVM>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

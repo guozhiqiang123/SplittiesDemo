@@ -18,10 +18,9 @@ import splitties.views.dsl.material.MaterialComponentsStyles
 import splitties.views.dsl.material.navigationView
 
 /**
- *company：成都标学科技有限公司
  *date：2021/9/5 下午2:24
  *coder：gzq
- *email：guozhiqiang@zlketang.com
+ *email：774550196@qq.com
  *description:主界面的UI样式
  */
 

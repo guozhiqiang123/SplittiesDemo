@@ -8,10 +8,9 @@ import splitties.mainhandler.mainHandler
 import splitties.mainhandler.mainHandlerSync
 
 /**
- *company：成都标学科技有限公司
  *date：2021/9/4 下午9:11
  *coder：gzq
- *email：guozhiqiang@zlketang.com
+ *email：774550196@qq.com
  *description:
  */
 

@@ -12,10 +12,9 @@ import kotlin.contracts.InvocationKind
 import kotlin.contracts.contract
 
 /**
- *company：成都标学科技有限公司
  *date：2021/9/4 下午5:54
  *coder：gzq
- *email：guozhiqiang@zlketang.com
+ *email：774550196@qq.com
  *description:
  */
 
