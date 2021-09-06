@@ -3,6 +3,7 @@ package com.gzq.splittiesdemo.home
 import android.content.Context
 import android.view.View
 import com.gzq.splittiesdemo.R
+import com.gzq.splittiesdemo.function.ItemClick
 import splitties.resources.color
 import splitties.toast.toast
 import splitties.views.backgroundColor
@@ -27,27 +28,23 @@ class HomeMainUi(override val ctx: Context) : Ui {
         setTitleTextColor(color(R.color.text_white))
     }
 
+
+    val mAdapter by lazy { HomeMainAdapter() }
+
+    //菜单list
+    private val list = recyclerView {
+        clipToPadding = false
+        setPaddingDp(top = 16)
+        setHasFixedSize(true)
+        adapter = mAdapter
+        layoutManager = mAdapter.layoutManager
+    }
+
     override val root: View
         get() = verticalLayout {
             //导航条
             add(toolbar, lParams(width = matchParent))
             //内容区
-            add(recyclerView {
-                clipToPadding = false
-                setPaddingDp(top = 16)
-                setHasFixedSize(true)
-                val data = arrayListOf(
-                    HomeMainItemData("第一行", 0),
-                    HomeMainItemData("第二行", 1)
-                )
-                val mAdapter = HomeMainAdapter(data, object :
-                    HomeMainAdapter.MyViewHolder.Host {
-                    override fun onItemClick(position: Int, itemData: HomeMainItemData) {
-                        toast(itemData.name)
-                    }
-                })
-                adapter = mAdapter
-                layoutManager = mAdapter.layoutManager
-            }, lParams(height = matchParent, width = matchParent))
+            add(list, lParams(height = matchParent, width = matchParent))
         }
 }
