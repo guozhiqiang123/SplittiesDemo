@@ -62,9 +62,9 @@ class HomeFragment : BaseFragment() {
             override fun onItemClick(position: Int, itemData: HomeMainItemData) {
                 when (itemData.position) {
                     VERTICAL_LISTVIEW -> {
-                        start<MainActivity> {
-
-                        }
+//                        start<MainActivity> {
+//
+//                        }
                     }
                     HORIZONTAL_LISTVIEW -> {
                     }

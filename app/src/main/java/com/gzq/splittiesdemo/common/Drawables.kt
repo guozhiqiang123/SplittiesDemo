@@ -1,11 +1,12 @@
 package com.gzq.splittiesdemo.common
 
+import android.content.res.ColorStateList
+import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
+import android.graphics.drawable.StateListDrawable
 import androidx.annotation.ColorInt
+import androidx.annotation.IntRange
 import androidx.annotation.Px
-import splitties.dimensions.dp
-import splitties.init.appCtx
-import splitties.resources.appColor
 
 /**
  *date：2021/9/6 下午10:14
@@ -15,42 +16,82 @@ import splitties.resources.appColor
  */
 
 fun shape(
-    @ColorInt solidColor: Int = appColor(android.R.color.transparent),
-    shape: Int = GradientDrawable.RECTANGLE,
+    @ColorInt solidColor: Int = Color.TRANSPARENT,
     @Px radius: Float = 0F,
+    @IntRange(from = 0x00, to = 0xFF) alpha: Int = 0xFF,
+    shape: Int = GradientDrawable.RECTANGLE,
     @Px topStart: Float = 0F,
     @Px topEnd: Float = 0F,
     @Px bottomEnd: Float = 0F,
     @Px bottomStart: Float = 0F,
-    @ColorInt strokeColor: Int = appColor(android.R.color.transparent),
-    @Px strokeWidth: Int = 1,
+    @ColorInt strokeColor: Int = Color.TRANSPARENT,
+    @Px strokeWidth: Int = 0,
     @Px dashWidth: Float = 0F,
     @Px dashGap: Float = 0F,
 ): GradientDrawable = GradientDrawable().apply {
-    setColor(solidColor)
     setShape(shape)
+    setColor(solidColor)
+    setAlpha(alpha)
     cornerRadius = radius
     if (topStart + topEnd + bottomEnd + bottomStart != 0F) {
-        val radiusArray = FloatArray(8)
-        radiusArray[0] = topStart
-        radiusArray[1] = topStart
-        radiusArray[2] = topEnd
-        radiusArray[3] = topEnd
-        radiusArray[4] = bottomEnd
-        radiusArray[5] = bottomEnd
-        radiusArray[6] = bottomStart
-        radiusArray[7] = bottomStart
-        cornerRadii = radiusArray
+        cornerRadii = floatArrayOf(
+            topStart,
+            topStart,
+            topEnd,
+            topEnd,
+            bottomEnd,
+            bottomEnd,
+            bottomStart,
+            bottomStart
+        )
     }
     setStroke(strokeWidth, strokeColor, dashWidth, dashGap)
 }
 
-//TODO:实现多状态的shape
-fun shapeSL() {
-
+fun stateColor(
+    @ColorInt normal: Int = Color.TRANSPARENT,
+    @ColorInt pressed: Int = normal,
+    @ColorInt focused: Int = normal,
+    @ColorInt unable: Int = normal,
+): ColorStateList {
+    val stateArray = Array(6) { intArrayOf() }
+    stateArray[0] = intArrayOf()
+    stateArray[1] = intArrayOf(android.R.attr.state_pressed, android.R.attr.state_enabled)
+    stateArray[2] = intArrayOf(android.R.attr.state_enabled, android.R.attr.state_focused)
+    stateArray[3] = intArrayOf(android.R.attr.state_enabled)
+    stateArray[4] = intArrayOf(android.R.attr.state_focused)
+    stateArray[5] = intArrayOf(android.R.attr.state_window_focused)
+    return ColorStateList(stateArray, intArrayOf(normal, pressed, focused, normal, focused, unable))
 }
 
-//TODO:使用StateListDrawable实现selector
-fun selector() {
-
+fun selector(
+    normal: GradientDrawable? = null,
+    pressed: GradientDrawable? = null,
+    focused: GradientDrawable? = null,
+    unable: GradientDrawable? = null
+): StateListDrawable = StateListDrawable().apply {
+    /**
+    <attr name="state_focused" format="boolean" />
+    <attr name="state_window_focused" format="boolean" />
+    <attr name="state_enabled" format="boolean" />
+    <attr name="state_checkable" format="boolean"/>
+    <attr name="state_checked" format="boolean"/>
+    <attr name="state_selected" format="boolean" />
+    <attr name="state_pressed" format="boolean" />
+    <attr name="state_activated" format="boolean" />
+    <attr name="state_active" format="boolean" />
+    <attr name="state_single" format="boolean" />
+    <attr name="state_first" format="boolean" />
+    <attr name="state_middle" format="boolean" />
+    <attr name="state_last" format="boolean" />
+    <attr name="state_accelerated" format="boolean" />
+    <attr name="state_hovered" format="boolean" />
+    <attr name="state_drag_can_accept" format="boolean" />
+    <attr name="state_drag_hovered" format="boolean" />
+    <attr name="state_accessibility_focused" format="boolean" />
+     */
+//    addState(intArrayOf(-android.R.attr.state_pressed), normal)
+//    addState(intArrayOf(android.R.attr.state_pressed), pressed)
+    addState(intArrayOf(-android.R.attr.state_enabled), normal)
+    addState(intArrayOf(android.R.attr.state_enabled), unable)
 }

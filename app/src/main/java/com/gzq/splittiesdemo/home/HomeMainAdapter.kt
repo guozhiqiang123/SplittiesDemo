@@ -2,27 +2,22 @@ package com.gzq.splittiesdemo.home
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.graphics.drawable.GradientDrawable
-import android.os.Build
 import android.util.AttributeSet
 import android.view.ViewGroup
-import androidx.annotation.RequiresApi
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.gzq.splittiesdemo.R
+import com.gzq.splittiesdemo.common.selector
 import com.gzq.splittiesdemo.common.shape
 import com.gzq.splittiesdemo.function.ItemClick
 import com.gzq.splittiesdemo.recyclerview.BaseViewHolder
 import splitties.dimensions.dp
-import splitties.init.appCtx
 import splitties.resources.color
 import splitties.views.dsl.constraintlayout.centerInParent
 import splitties.views.dsl.constraintlayout.lParams
 import splitties.views.dsl.core.add
-import splitties.views.dsl.core.matchParent
 import splitties.views.dsl.core.textView
 import splitties.views.dsl.core.wrapContent
-import splitties.views.dsl.material.shapeableImageView
 import splitties.views.dsl.recyclerview.verticalListLayoutParams
 import splitties.views.recyclerview.verticalLayoutManager
 import splitties.views.setPaddingDp
@@ -108,7 +103,15 @@ class HomeMainItemUi @JvmOverloads constructor(
     }
 
     init {
-        background = shape(solidColor = color(R.color.green_500), radius = dp(4F))
+        isEnabled = false
+//        background = selector(
+//            normal = shape(solidColor = color(R.color.green_500), radius = dp(4F)),
+//            pressed = shape(solidColor = color(R.color.green_200), radius = dp(4F))
+//        )
+        background = selector(
+            normal = shape(solidColor = color(R.color.green_500), radius = dp(4f)),
+            unable = shape(solidColor = color(R.color.green_200), radius = dp(4f))
+        )
         add(textView, lParams(width = wrapContent, height = wrapContent) {
             centerInParent()
             setPaddingDp(top = 12, bottom = 12)
