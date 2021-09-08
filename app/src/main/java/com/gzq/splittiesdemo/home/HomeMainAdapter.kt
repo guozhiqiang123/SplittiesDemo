@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.gzq.splittiesdemo.R
+import com.gzq.splittiesdemo.common.mediumTextView
 import com.gzq.splittiesdemo.common.selector
 import com.gzq.splittiesdemo.common.shape
 import com.gzq.splittiesdemo.function.ItemClick
@@ -20,7 +21,9 @@ import splitties.views.dsl.core.textView
 import splitties.views.dsl.core.wrapContent
 import splitties.views.dsl.recyclerview.verticalListLayoutParams
 import splitties.views.recyclerview.verticalLayoutManager
+import splitties.views.selectable.constraintlayout.SelectableConstraintLayout
 import splitties.views.setPaddingDp
+import kotlin.contracts.ExperimentalContracts
 
 /**
  *company：成都环宇知了科技有限公司
@@ -95,18 +98,15 @@ class HomeMainItemUi(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
-) : ConstraintLayout(context, attrs, defStyleAttr) {
+) : SelectableConstraintLayout(context, attrs, defStyleAttr) {
 
-    val textView = textView {
+    val textView = mediumTextView {
         textSize = 14f
         setTextColor(color(R.color.text_white))
     }
 
     init {
-        background = selector(
-            normal = shape(solidColorRes = R.color.green_500, radius = dp(4f)),
-            pressed = shape(solidColor = color(R.color.green_200), radius = dp(4f))
-        )
+        background = shape(solidColorRes = R.color.green_500, radius = dp(4F))
         add(textView, lParams(width = wrapContent, height = wrapContent) {
             centerInParent()
             setPaddingDp(top = 12, bottom = 12)

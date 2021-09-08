@@ -8,6 +8,7 @@ import com.google.android.material.bottomnavigation.LabelVisibilityMode
 import com.google.android.material.navigation.NavigationBarView
 import com.gzq.splittiesdemo.R
 import com.gzq.splittiesdemo.common.defaultToolbar
+import com.gzq.splittiesdemo.common.stateColor
 import splitties.resources.color
 import splitties.resources.colorSL
 import splitties.views.backgroundColor
@@ -29,12 +30,12 @@ class MainUi(override val ctx: Context) : Ui {
     private val materialComponentsStyles = MaterialComponentsStyles(ctx)
 
     //底部导航条
-    private val bottomNavigation = materialComponentsStyles.bottomNavigationView.default {
+    val bottomNavigation = materialComponentsStyles.bottomNavigationView.default {
         inflateMenu(R.menu.main_navigation_menu)
-        backgroundColor=color(R.color.green_500)
+        backgroundColor = color(R.color.green_500)
         labelVisibilityMode = NavigationBarView.LABEL_VISIBILITY_LABELED
-        itemIconTintList = colorSL(R.color.selector_bottom_navigation)
-        itemTextColor = colorSL(R.color.selector_bottom_navigation)
+        itemIconTintList = stateColor(normalRes = R.color.whiteAlpha70, selectedRes = R.color.white)
+        itemTextColor = stateColor(normalRes = R.color.whiteAlpha70, selectedRes = R.color.white)
     }
     override val root: View
         get() = constraintLayout {

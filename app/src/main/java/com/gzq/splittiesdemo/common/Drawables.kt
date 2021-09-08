@@ -68,26 +68,42 @@ data class shape(
  * 替代res/color/下的<selector></selector>
  */
 fun stateColor(
-    @ColorInt normal: Int = Color.BLACK,
+    @ColorInt normal: Int = Color.TRANSPARENT,
+    @ColorRes normalRes: Int = android.R.color.transparent,
     @ColorInt pressed: Int = normal,
+    @ColorRes pressedRes: Int = normalRes,
     @ColorInt selected: Int = normal,
+    @ColorRes selectedRes: Int = normalRes,
+    @ColorInt checked: Int = normal,
+    @ColorRes checkedRes: Int = normalRes,
     @ColorInt focused: Int = normal,
+    @ColorRes focusedRes: Int = normalRes,
     @ColorInt unable: Int = normal,
+    @ColorRes unableRes: Int = normalRes
 ): ColorStateList {
-    val stateArray = Array(5) { intArrayOf() }
+    val stateArray = Array(6) { intArrayOf() }
     //pressed
     stateArray[0] = intArrayOf(android.R.attr.state_pressed)
     //selected
     stateArray[1] = intArrayOf(android.R.attr.state_selected)
+    //checked
+    stateArray[2] = intArrayOf(android.R.attr.state_checked)
     //focused
-    stateArray[2] = intArrayOf(android.R.attr.state_focused)
+    stateArray[3] = intArrayOf(android.R.attr.state_focused)
     //unable
-    stateArray[3] = intArrayOf(-android.R.attr.state_enabled)
+    stateArray[4] = intArrayOf(-android.R.attr.state_enabled)
     //default
-    stateArray[4] = intArrayOf()
+    stateArray[5] = intArrayOf()
     return ColorStateList(
         stateArray,
-        intArrayOf(pressed, selected, focused, unable, normal)
+        intArrayOf(
+            pressed or appColor(pressedRes),
+            selected or appColor(selectedRes),
+            checked or appColor(checkedRes),
+            focused or appColor(focusedRes),
+            unable or appColor(unableRes),
+            normal or appColor(normalRes)
+        )
     )
 }
 

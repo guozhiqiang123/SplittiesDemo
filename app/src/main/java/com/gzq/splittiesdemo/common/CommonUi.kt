@@ -1,12 +1,24 @@
 package com.gzq.splittiesdemo.common
 
+import android.content.Context
 import android.content.res.ColorStateList
+import android.graphics.Paint
 import android.view.View
+import android.widget.TextView
 import androidx.annotation.*
+import androidx.core.view.doOnPreDraw
 import com.gzq.splittiesdemo.R
+import splitties.dimensions.dp
 import splitties.resources.appColor
 import splitties.resources.colorSL
 import splitties.views.dsl.appcompat.toolbar
+import splitties.views.dsl.core.NO_THEME
+import splitties.views.dsl.core.Ui
+import splitties.views.dsl.core.textView
+import kotlin.OptIn
+import kotlin.contracts.ExperimentalContracts
+import kotlin.contracts.InvocationKind
+import kotlin.contracts.contract
 
 /**
  *date：2021/9/5 下午6:42
@@ -38,4 +50,59 @@ fun View.defaultToolbar(
     titleTextColorSL?.apply { setTitleTextColor(this) }
     navigationIconRes?.apply { setNavigationIcon(this) }
     collapseIconRes?.apply { setCollapseIcon(this) }
+}
+
+/**
+ * 中粗TextView，弥补系统子重的不足
+ */
+@ExperimentalContracts
+inline fun Context.mediumTextView(
+    @IdRes id: Int = View.NO_ID,
+    @StyleRes theme: Int = NO_THEME,
+    initView: TextView.() -> Unit = {}
+): TextView {
+    contract { callsInPlace(initView, InvocationKind.EXACTLY_ONCE) }
+    return textView(id, theme) {
+        doOnPreDraw {
+            paint.strokeWidth = 2F
+            paint.style = Paint.Style.FILL_AND_STROKE
+        }
+        initView.invoke(this)
+    }
+}
+
+/**
+ * 中粗TextView，弥补系统子重的不足
+ */
+inline fun View.mediumTextView(
+    @IdRes id: Int = View.NO_ID,
+    @StyleRes theme: Int = NO_THEME,
+    initView: TextView.() -> Unit = {}
+): TextView {
+    contract { callsInPlace(initView, InvocationKind.EXACTLY_ONCE) }
+    return textView(id, theme) {
+        doOnPreDraw {
+            paint.strokeWidth = 2F
+            paint.style = Paint.Style.FILL_AND_STROKE
+        }
+        initView.invoke(this)
+    }
+}
+
+/**
+ * 中粗TextView，弥补系统子重的不足
+ */
+inline fun Ui.mediumTextView(
+    @IdRes id: Int = View.NO_ID,
+    @StyleRes theme: Int = NO_THEME,
+    initView: TextView.() -> Unit = {}
+): TextView {
+    contract { callsInPlace(initView, InvocationKind.EXACTLY_ONCE) }
+    return textView(id, theme) {
+        doOnPreDraw {
+            paint.strokeWidth = 2F
+            paint.style = Paint.Style.FILL_AND_STROKE
+        }
+        initView.invoke(this)
+    }
 }

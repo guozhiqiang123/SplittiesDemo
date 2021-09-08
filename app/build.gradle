@@ -23,12 +23,15 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
+//    compileOptions {
+//        sourceCompatibility JavaVersion.VERSION_1_8
+//        targetCompatibility JavaVersion.VERSION_1_8
+//    }
     kotlinOptions {
-        jvmTarget = '1.8'
+        //升级gradle后，只能使用java11编译
+        //jvmTarget = '1.8'
+        //配置忽略代码中实验性契约API的检查
+        freeCompilerArgs+=['-Xopt-in=kotlin.contracts.ExperimentalContracts']
     }
 }
 
