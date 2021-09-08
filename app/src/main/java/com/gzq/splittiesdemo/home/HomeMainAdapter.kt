@@ -7,8 +7,8 @@ import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.gzq.splittiesdemo.R
-import com.gzq.splittiesdemo.common.shape
 import com.gzq.splittiesdemo.common.selector
+import com.gzq.splittiesdemo.common.shape
 import com.gzq.splittiesdemo.function.ItemClick
 import com.gzq.splittiesdemo.recyclerview.BaseViewHolder
 import splitties.dimensions.dp

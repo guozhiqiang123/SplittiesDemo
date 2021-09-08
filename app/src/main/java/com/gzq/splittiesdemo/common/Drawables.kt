@@ -25,15 +25,14 @@ import splitties.resources.appColor
     GradientDrawable.RING
 )
 @kotlin.annotation.Retention(AnnotationRetention.SOURCE)
-annotation
-class DrawableShape
+annotation class DrawableShape
 
 data class shape(
     @ColorInt val solidColor: Int = Color.TRANSPARENT,
     @ColorRes val solidColorRes: Int = android.R.color.transparent,
     @Px val radius: Float = 0F,
     @IntRange(from = 0x00, to = 0xFF) val alphaValue: Int = 0xFF,
-    @DrawableShape val shapeValue: Int = GradientDrawable.RECTANGLE,
+    @DrawableShape val shapeValue: Int = RECTANGLE,
     @Px val topStart: Float = 0F,
     @Px val topEnd: Float = 0F,
     @Px val bottomEnd: Float = 0F,
