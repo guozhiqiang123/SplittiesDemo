@@ -2,11 +2,12 @@ package com.gzq.splittiesdemo.common
 
 import android.content.res.ColorStateList
 import android.graphics.Color
+import android.graphics.drawable.Drawable
 import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.StateListDrawable
-import androidx.annotation.ColorInt
+import androidx.annotation.*
 import androidx.annotation.IntRange
-import androidx.annotation.Px
+import splitties.resources.appColor
 
 /**
  *date：2021/9/6 下午10:14
@@ -15,83 +16,97 @@ import androidx.annotation.Px
  *description:动态实现shape，selector。
  */
 
-fun shape(
-    @ColorInt solidColor: Int = Color.TRANSPARENT,
-    @Px radius: Float = 0F,
-    @IntRange(from = 0x00, to = 0xFF) alpha: Int = 0xFF,
-    shape: Int = GradientDrawable.RECTANGLE,
-    @Px topStart: Float = 0F,
-    @Px topEnd: Float = 0F,
-    @Px bottomEnd: Float = 0F,
-    @Px bottomStart: Float = 0F,
-    @ColorInt strokeColor: Int = Color.TRANSPARENT,
-    @Px strokeWidth: Int = 0,
-    @Px dashWidth: Float = 0F,
-    @Px dashGap: Float = 0F,
-): GradientDrawable = GradientDrawable().apply {
-    setShape(shape)
-    setColor(solidColor)
-    setAlpha(alpha)
-    cornerRadius = radius
-    if (topStart + topEnd + bottomEnd + bottomStart != 0F) {
-        cornerRadii = floatArrayOf(
-            topStart,
-            topStart,
-            topEnd,
-            topEnd,
-            bottomEnd,
-            bottomEnd,
-            bottomStart,
-            bottomStart
-        )
+@Target(AnnotationTarget.VALUE_PARAMETER, AnnotationTarget.FIELD, AnnotationTarget.FUNCTION)
+@MustBeDocumented
+@IntDef(
+    GradientDrawable.RECTANGLE,
+    GradientDrawable.OVAL,
+    GradientDrawable.LINE,
+    GradientDrawable.RING
+)
+@kotlin.annotation.Retention(AnnotationRetention.SOURCE)
+annotation
+class DrawableShape
+
+data class shape(
+    @ColorInt val solidColor: Int = Color.TRANSPARENT,
+    @ColorRes val solidColorRes: Int = android.R.color.transparent,
+    @Px val radius: Float = 0F,
+    @IntRange(from = 0x00, to = 0xFF) val alphaValue: Int = 0xFF,
+    @DrawableShape val shapeValue: Int = GradientDrawable.RECTANGLE,
+    @Px val topStart: Float = 0F,
+    @Px val topEnd: Float = 0F,
+    @Px val bottomEnd: Float = 0F,
+    @Px val bottomStart: Float = 0F,
+    @ColorInt val strokeColor: Int = Color.TRANSPARENT,
+    @ColorRes val strokeColorRes: Int = android.R.color.transparent,
+    @Px val strokeWidth: Int = 0,
+    @Px val dashWidth: Float = 0F,
+    @Px val dashGap: Float = 0F
+) : GradientDrawable() {
+    init {
+        shape = shapeValue
+        setColor(solidColor or appColor(solidColorRes))
+        alpha = alphaValue
+        cornerRadius = radius
+        if (topStart != 0F && topEnd != 0F && bottomEnd != 0F && bottomStart != 0F) {
+            cornerRadii = floatArrayOf(
+                topStart,
+                topStart,
+                topEnd,
+                topEnd,
+                bottomEnd,
+                bottomEnd,
+                bottomStart,
+                bottomStart
+            )
+        }
+        setStroke(strokeWidth, strokeColor or appColor(strokeColorRes), dashWidth, dashGap)
     }
-    setStroke(strokeWidth, strokeColor, dashWidth, dashGap)
 }
 
+/**
+ * 替代res/color/下的<selector></selector>
+ */
 fun stateColor(
-    @ColorInt normal: Int = Color.TRANSPARENT,
+    @ColorInt normal: Int = Color.BLACK,
     @ColorInt pressed: Int = normal,
+    @ColorInt selected: Int = normal,
     @ColorInt focused: Int = normal,
     @ColorInt unable: Int = normal,
 ): ColorStateList {
-    val stateArray = Array(6) { intArrayOf() }
-    stateArray[0] = intArrayOf()
-    stateArray[1] = intArrayOf(android.R.attr.state_pressed, android.R.attr.state_enabled)
-    stateArray[2] = intArrayOf(android.R.attr.state_enabled, android.R.attr.state_focused)
-    stateArray[3] = intArrayOf(android.R.attr.state_enabled)
-    stateArray[4] = intArrayOf(android.R.attr.state_focused)
-    stateArray[5] = intArrayOf(android.R.attr.state_window_focused)
-    return ColorStateList(stateArray, intArrayOf(normal, pressed, focused, normal, focused, unable))
+    val stateArray = Array(5) { intArrayOf() }
+    //pressed
+    stateArray[0] = intArrayOf(android.R.attr.state_pressed)
+    //selected
+    stateArray[1] = intArrayOf(android.R.attr.state_selected)
+    //focused
+    stateArray[2] = intArrayOf(android.R.attr.state_focused)
+    //unable
+    stateArray[3] = intArrayOf(-android.R.attr.state_enabled)
+    //default
+    stateArray[4] = intArrayOf()
+    return ColorStateList(
+        stateArray,
+        intArrayOf(pressed, selected, focused, unable, normal)
+    )
 }
 
+/**
+ * 替代<selector></selector>
+ */
 fun selector(
-    normal: GradientDrawable? = null,
-    pressed: GradientDrawable? = null,
-    focused: GradientDrawable? = null,
-    unable: GradientDrawable? = null
+    normal: Drawable,
+    pressed: Drawable? = null,
+    selected: Drawable? = null,
+    unable: Drawable? = null
 ): StateListDrawable = StateListDrawable().apply {
-    /**
-    <attr name="state_focused" format="boolean" />
-    <attr name="state_window_focused" format="boolean" />
-    <attr name="state_enabled" format="boolean" />
-    <attr name="state_checkable" format="boolean"/>
-    <attr name="state_checked" format="boolean"/>
-    <attr name="state_selected" format="boolean" />
-    <attr name="state_pressed" format="boolean" />
-    <attr name="state_activated" format="boolean" />
-    <attr name="state_active" format="boolean" />
-    <attr name="state_single" format="boolean" />
-    <attr name="state_first" format="boolean" />
-    <attr name="state_middle" format="boolean" />
-    <attr name="state_last" format="boolean" />
-    <attr name="state_accelerated" format="boolean" />
-    <attr name="state_hovered" format="boolean" />
-    <attr name="state_drag_can_accept" format="boolean" />
-    <attr name="state_drag_hovered" format="boolean" />
-    <attr name="state_accessibility_focused" format="boolean" />
-     */
-//    addState(intArrayOf(-android.R.attr.state_pressed), normal)
-//    addState(intArrayOf(android.R.attr.state_pressed), pressed)
-    addState(intArrayOf(-android.R.attr.state_enabled), normal)
-    addState(intArrayOf(android.R.attr.state_enabled), unable)
+    //pressed
+    addState(intArrayOf(android.R.attr.state_pressed), pressed)
+    //selected
+    addState(intArrayOf(android.R.attr.state_selected), selected)
+    //unable
+    addState(intArrayOf(-android.R.attr.state_enabled, android.R.attr.state_window_focused), unable)
+    //default
+    addState(intArrayOf(), normal)
 }

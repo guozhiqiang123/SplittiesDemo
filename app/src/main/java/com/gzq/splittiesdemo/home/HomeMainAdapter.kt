@@ -7,8 +7,8 @@ import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.gzq.splittiesdemo.R
-import com.gzq.splittiesdemo.common.selector
 import com.gzq.splittiesdemo.common.shape
+import com.gzq.splittiesdemo.common.selector
 import com.gzq.splittiesdemo.function.ItemClick
 import com.gzq.splittiesdemo.recyclerview.BaseViewHolder
 import splitties.dimensions.dp
@@ -91,7 +91,7 @@ class HomeMainAdapter : RecyclerView.Adapter<HomeMainAdapter.MyViewHolder>() {
 /**
  * Item的布局
  */
-class HomeMainItemUi @JvmOverloads constructor(
+class HomeMainItemUi(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
@@ -103,14 +103,9 @@ class HomeMainItemUi @JvmOverloads constructor(
     }
 
     init {
-        isEnabled = false
-//        background = selector(
-//            normal = shape(solidColor = color(R.color.green_500), radius = dp(4F)),
-//            pressed = shape(solidColor = color(R.color.green_200), radius = dp(4F))
-//        )
         background = selector(
-            normal = shape(solidColor = color(R.color.green_500), radius = dp(4f)),
-            unable = shape(solidColor = color(R.color.green_200), radius = dp(4f))
+            normal = shape(solidColorRes = R.color.green_500, radius = dp(4f)),
+            pressed = shape(solidColor = color(R.color.green_200), radius = dp(4f))
         )
         add(textView, lParams(width = wrapContent, height = wrapContent) {
             centerInParent()

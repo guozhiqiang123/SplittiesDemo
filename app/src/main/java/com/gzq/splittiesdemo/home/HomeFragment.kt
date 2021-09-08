@@ -4,18 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.constraintlayout.helper.widget.Carousel
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.gzq.splittiesdemo.HelloWorldUi
-import com.gzq.splittiesdemo.MainActivity
-import com.gzq.splittiesdemo.R
 import com.gzq.splittiesdemo.common.BaseFragment
 import com.gzq.splittiesdemo.function.ItemClick
 import splitties.checkedlazy.mainThreadLazy
 import splitties.exceptions.unsupported
-import splitties.exceptions.unsupportedAction
-import splitties.fragments.start
 import splitties.toast.toast
 
 /**
@@ -60,6 +53,7 @@ class HomeFragment : BaseFragment() {
 
         ui.mAdapter.setOnItemClickListener(object : ItemClick<HomeMainItemData> {
             override fun onItemClick(position: Int, itemData: HomeMainItemData) {
+                toast(itemData.name)
                 when (itemData.position) {
                     VERTICAL_LISTVIEW -> {
 //                        start<MainActivity> {
