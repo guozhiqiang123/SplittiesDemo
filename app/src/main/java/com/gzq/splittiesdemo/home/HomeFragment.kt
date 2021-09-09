@@ -7,8 +7,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import com.gzq.splittiesdemo.common.BaseFragment
 import com.gzq.splittiesdemo.function.ItemClick
+import com.gzq.splittiesdemo.home.vertical.VerticalListViewActivity
 import splitties.checkedlazy.mainThreadLazy
 import splitties.exceptions.unsupported
+import splitties.fragments.start
 import splitties.toast.toast
 
 /**
@@ -56,9 +58,9 @@ class HomeFragment : BaseFragment() {
                 toast(itemData.name)
                 when (itemData.position) {
                     VERTICAL_LISTVIEW -> {
-//                        start<MainActivity> {
-//
-//                        }
+                        start<VerticalListViewActivity> {
+
+                        }
                     }
                     HORIZONTAL_LISTVIEW -> {
                     }

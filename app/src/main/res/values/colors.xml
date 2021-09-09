@@ -13,4 +13,5 @@
     <color name="green_700">#FF388E3C</color>
     <color name="text_black">#FF313131</color>
     <color name="text_white">#FFFFFFFF</color>
+    <color name="text_grey">#FF8C8C8C</color>
 </resources>

@@ -7,6 +7,8 @@ import android.view.View
 import android.widget.TextView
 import androidx.annotation.*
 import androidx.core.view.doOnPreDraw
+import com.google.android.material.imageview.ShapeableImageView
+import com.google.android.material.shape.ShapeAppearanceModel
 import com.gzq.splittiesdemo.R
 import splitties.dimensions.dp
 import splitties.resources.appColor
@@ -15,6 +17,7 @@ import splitties.views.dsl.appcompat.toolbar
 import splitties.views.dsl.core.NO_THEME
 import splitties.views.dsl.core.Ui
 import splitties.views.dsl.core.textView
+import splitties.views.dsl.material.shapeableImageView
 import kotlin.OptIn
 import kotlin.contracts.ExperimentalContracts
 import kotlin.contracts.InvocationKind
@@ -103,6 +106,23 @@ inline fun Ui.mediumTextView(
             paint.strokeWidth = 2F
             paint.style = Paint.Style.FILL_AND_STROKE
         }
+        initView.invoke(this)
+    }
+}
+
+/**
+ * 4dp圆角ImageView
+ */
+inline fun Ui.corner4ImageView(
+    @IdRes id: Int = View.NO_ID,
+    @StyleRes theme: Int = NO_THEME,
+    initView: ShapeableImageView.() -> Unit = {}
+): ShapeableImageView {
+    contract { callsInPlace(initView, InvocationKind.EXACTLY_ONCE) }
+    return shapeableImageView(id, theme) {
+        shapeAppearanceModel = ShapeAppearanceModel.Builder()
+            .setAllCornerSizes(dp(4F))
+            .build()
         initView.invoke(this)
     }
 }
