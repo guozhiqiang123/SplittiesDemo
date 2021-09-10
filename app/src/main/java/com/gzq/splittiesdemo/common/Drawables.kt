@@ -4,9 +4,12 @@ import android.content.res.ColorStateList
 import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.GradientDrawable
+import android.graphics.drawable.GradientDrawable.RECTANGLE
+import android.graphics.drawable.InsetDrawable
 import android.graphics.drawable.StateListDrawable
 import androidx.annotation.*
 import androidx.annotation.IntRange
+import com.gzq.splittiesdemo.ext.PaddingGradientDrawable
 import splitties.resources.appColor
 
 /**
@@ -27,23 +30,40 @@ import splitties.resources.appColor
 @kotlin.annotation.Retention(AnnotationRetention.SOURCE)
 annotation class DrawableShape
 
-data class shape(
-    @ColorInt val solidColor: Int = Color.TRANSPARENT,
-    @ColorRes val solidColorRes: Int = android.R.color.transparent,
-    @Px val radius: Float = 0F,
-    @IntRange(from = 0x00, to = 0xFF) val alphaValue: Int = 0xFF,
-    @DrawableShape val shapeValue: Int = RECTANGLE,
-    @Px val topStart: Float = 0F,
-    @Px val topEnd: Float = 0F,
-    @Px val bottomEnd: Float = 0F,
-    @Px val bottomStart: Float = 0F,
-    @ColorInt val strokeColor: Int = Color.TRANSPARENT,
-    @ColorRes val strokeColorRes: Int = android.R.color.transparent,
-    @Px val strokeWidth: Int = 0,
-    @Px val dashWidth: Float = 0F,
-    @Px val dashGap: Float = 0F
-) : GradientDrawable() {
-    init {
+/**
+ * 替代<shape></shape>
+ * 该方法兼容了padding和margin的设置
+ *
+ */
+fun shape(
+    @ColorInt solidColor: Int = Color.TRANSPARENT,
+    @ColorRes solidColorRes: Int = android.R.color.transparent,
+    @Px radius: Float = 0F,
+    @IntRange(from = 0x00, to = 0xFF) alphaValue: Int = 0xFF,
+    @DrawableShape shapeValue: Int = RECTANGLE,
+    @Px topStart: Float = 0F,
+    @Px topEnd: Float = 0F,
+    @Px bottomEnd: Float = 0F,
+    @Px bottomStart: Float = 0F,
+    @ColorInt strokeColor: Int = Color.TRANSPARENT,
+    @ColorRes strokeColorRes: Int = android.R.color.transparent,
+    @Px strokeWidth: Int = 0,
+    @Px dashWidth: Float = 0F,
+    @Px dashGap: Float = 0F,
+    @Px padding: Int = 0,
+    @Px paddingStart: Int = 0,
+    @Px paddingEnd: Int = 0,
+    @Px paddingTop: Int = 0,
+    @Px paddingBottom: Int = 0,
+    @Px margin: Int = 0,
+    @Px marginStart: Int = 0,
+    @Px marginEnd: Int = 0,
+    @Px marginTop: Int = 0,
+    @Px marginBottom: Int = 0,
+    @Px sizeWidth: Int = 0,
+    @Px sizeHeight: Int = 0
+): Drawable {
+    val drawable = PaddingGradientDrawable().apply {
         shape = shapeValue
         setColor(solidColor or appColor(solidColorRes))
         alpha = alphaValue
@@ -61,7 +81,24 @@ data class shape(
             )
         }
         setStroke(strokeWidth, strokeColor or appColor(strokeColorRes), dashWidth, dashGap)
+        setPadding(
+            padding or paddingStart,
+            padding or paddingTop,
+            padding or paddingEnd,
+            padding or paddingBottom
+        )
+        setSize(sizeWidth, sizeHeight)
     }
+    if (margin and marginStart and marginEnd and marginTop and marginBottom == 0) {
+        return InsetDrawable(
+            drawable,
+            margin or marginStart,
+            margin or marginTop,
+            margin or marginEnd,
+            margin or marginBottom
+        )
+    }
+    return drawable
 }
 
 /**

@@ -55,7 +55,6 @@ class HomeFragment : BaseFragment() {
 
         ui.mAdapter.setOnItemClickListener(object : ItemClick<HomeMainItemData> {
             override fun onItemClick(position: Int, itemData: HomeMainItemData) {
-                toast(itemData.name)
                 when (itemData.position) {
                     VERTICAL_LISTVIEW -> {
                         start<VerticalListViewActivity> {

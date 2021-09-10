@@ -2,7 +2,10 @@ package com.gzq.splittiesdemo.home.vertical
 
 import android.os.Bundle
 import com.gzq.splittiesdemo.common.BaseActivity
+import com.gzq.splittiesdemo.data.Item
+import com.gzq.splittiesdemo.function.ItemClick
 import splitties.checkedlazy.mainThreadLazy
+import splitties.toast.toast
 import splitties.views.dsl.core.setContentView
 
 /**
@@ -20,7 +23,11 @@ class VerticalListViewActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(ui)
 
-
+        ui.mAdapter.setOnItemClickListener(object : ItemClick<Item> {
+            override fun onItemClick(position: Int, itemData: Item) {
+                toast(itemData.title)
+            }
+        })
 
     }
 }

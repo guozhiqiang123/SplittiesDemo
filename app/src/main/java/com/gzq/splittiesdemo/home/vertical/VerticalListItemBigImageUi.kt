@@ -3,14 +3,14 @@ package com.gzq.splittiesdemo.home.vertical
 import android.content.Context
 import android.view.View
 import android.widget.ImageView
+import android.widget.LinearLayout
 import com.gzq.splittiesdemo.R
 import com.gzq.splittiesdemo.common.corner4ImageView
-import com.gzq.splittiesdemo.common.mediumTextView
 import com.gzq.splittiesdemo.data.Item
 import splitties.dimensions.dp
-import splitties.resources.color
 import splitties.views.dsl.core.*
 import splitties.views.padding
+import splitties.views.selectable.SelectableLinearLayout
 
 class VerticalListItemBigImageUi(override val ctx: Context) : Ui {
     private val corner4Image = corner4ImageView() {
@@ -25,7 +25,8 @@ class VerticalListItemBigImageUi(override val ctx: Context) : Ui {
     private val source = textView(theme = R.style.tv_medium_14sp_grey)
 
     override val root: View
-        get() = verticalLayout {
+        get() = SelectableLinearLayout(ctx).apply {
+            orientation = LinearLayout.VERTICAL
             padding = dp(16)
             //图片
             add(corner4Image, lParams(width = matchParent, height = dp(150)))
