@@ -17,8 +17,8 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     sourceSets {
-        main{
-            res.srcDirs+=['src/main/theme']
+        main {
+            res.srcDirs += ['src/main/theme']
         }
     }
     buildTypes {
@@ -54,4 +54,5 @@ dependencies {
     implementation("com.louiscad.splitties:splitties-fun-pack-android-base-with-views-dsl:3.0.0")
     implementation("com.louiscad.splitties:splitties-fun-pack-android-appcompat-with-views-dsl:3.0.0")
     implementation("com.louiscad.splitties:splitties-fun-pack-android-material-components-with-views-dsl:3.0.0")
+    implementation("com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.6")
 }

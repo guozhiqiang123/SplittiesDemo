@@ -12,6 +12,9 @@ import splitties.resources.styledDrawable
 import splitties.views.dsl.core.*
 import splitties.views.padding
 
+/**
+ * VerticalList-小图模式
+ */
 class VerticalListItemSmallImageUi(override val ctx: Context) : Ui {
     private val corner4Image = corner4ImageView() {
         scaleType = ImageView.ScaleType.CENTER_CROP
@@ -26,7 +29,7 @@ class VerticalListItemSmallImageUi(override val ctx: Context) : Ui {
         setTextColor(color(R.color.text_grey))
     }
 
-    private val favIcon = imageButton {
+    val favIcon = imageButton {
         background = styledDrawable(R.attr.selectableItemBackgroundBorderless)
         setImageResource(R.drawable.baseline_favorite_border_24)
     }
@@ -49,5 +52,16 @@ class VerticalListItemSmallImageUi(override val ctx: Context) : Ui {
         corner4Image.setImageResource(data.imageId)
         centerTitle.text = data.title
         centerSubTitle.text = data.subtitle
+        favIcon.setImageResource(
+            if (data.isLike) R.drawable.baseline_favorite_24
+            else R.drawable.baseline_favorite_border_24
+        )
+    }
+
+    fun updateFavIconState(isLike: Boolean) {
+        favIcon.setImageResource(
+            if (isLike) R.drawable.baseline_favorite_24
+            else R.drawable.baseline_favorite_border_24
+        )
     }
 }

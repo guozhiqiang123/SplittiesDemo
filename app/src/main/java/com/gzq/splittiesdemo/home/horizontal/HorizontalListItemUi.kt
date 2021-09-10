@@ -1,4 +1,4 @@
-package com.gzq.splittiesdemo.home.vertical
+package com.gzq.splittiesdemo.home.horizontal
 
 import android.content.Context
 import android.view.View
@@ -9,13 +9,18 @@ import com.gzq.splittiesdemo.common.corner4ImageView
 import com.gzq.splittiesdemo.data.Item
 import splitties.dimensions.dp
 import splitties.views.dsl.core.*
+import splitties.views.dsl.material.materialCardView
 import splitties.views.padding
 import splitties.views.selectable.SelectableLinearLayout
 
 /**
- * VerticalList-大图模式
+ *date：2021/9/10 下午10:40
+ *coder：gzq
+ *email：774550196@qq.com
+ *description:
  */
-class VerticalListItemBigImageUi(override val ctx: Context) : Ui {
+
+class HorizontalListItemUi(override val ctx: Context) : Ui {
     private val corner4Image = corner4ImageView() {
         scaleType = ImageView.ScaleType.CENTER_CROP
     }
@@ -28,19 +33,21 @@ class VerticalListItemBigImageUi(override val ctx: Context) : Ui {
     private val source = textView(theme = R.style.tv_medium_14sp_grey)
 
     override val root: View
-        get() = SelectableLinearLayout(ctx).apply {
-            orientation = LinearLayout.VERTICAL
-            padding = dp(16)
-            //图片
-            add(corner4Image, lParams(width = matchParent, height = dp(150)))
-            //间隙
-            add(space(), lParams(width = matchParent, height = dp(16)))
-            //主标题
-            add(title, lParams(width = matchParent))
-            //副标题
-            add(subTitle, lParams(width = matchParent))
-            //来源
-            add(source, lParams())
+        get() = materialCardView {
+            add(verticalLayout {
+                orientation = LinearLayout.VERTICAL
+                padding = dp(16)
+                //图片
+                add(corner4Image, lParams(width = matchParent, height = dp(100)))
+                //间隙
+                add(space(), lParams(width = matchParent, height = dp(16)))
+                //主标题
+                add(title, lParams(width = matchParent))
+                //副标题
+                add(subTitle, lParams(width = matchParent))
+                //来源
+                add(source, lParams())
+            }, lParams(matchParent, matchParent) { })
         }
 
     fun renderUi(data: Item) {

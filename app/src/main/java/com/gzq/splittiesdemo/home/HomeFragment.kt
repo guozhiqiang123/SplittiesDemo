@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import com.gzq.splittiesdemo.common.BaseFragment
 import com.gzq.splittiesdemo.function.ItemClick
+import com.gzq.splittiesdemo.home.horizontal.HorizontalListViewActivity
 import com.gzq.splittiesdemo.home.vertical.VerticalListViewActivity
 import splitties.checkedlazy.mainThreadLazy
 import splitties.exceptions.unsupported
@@ -62,6 +63,7 @@ class HomeFragment : BaseFragment() {
                         }
                     }
                     HORIZONTAL_LISTVIEW -> {
+                        start<HorizontalListViewActivity> {  }
                     }
                     GRID_LISTVIEW -> {
 

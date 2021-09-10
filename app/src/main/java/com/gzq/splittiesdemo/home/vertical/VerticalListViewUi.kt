@@ -7,7 +7,10 @@ import com.gzq.splittiesdemo.R
 import com.gzq.splittiesdemo.common.shape
 import com.gzq.splittiesdemo.data.DemoDataProvider
 import splitties.dimensions.dp
-import splitties.views.dsl.core.Ui
+import splitties.resources.color
+import splitties.views.backgroundColor
+import splitties.views.dsl.appcompat.toolbar
+import splitties.views.dsl.core.*
 import splitties.views.dsl.recyclerview.recyclerView
 
 /**
@@ -19,24 +22,38 @@ import splitties.views.dsl.recyclerview.recyclerView
 
 class VerticalListViewUi(override val ctx: Context) : Ui {
 
-    val mAdapter by lazy { VerticalListViewAdapter(DemoDataProvider.itemList) }
+    //顶部导航条
+    val toolbar = toolbar {
+        backgroundColor = color(R.color.green_500)
+        setTitle(R.string.list_view)
+        setTitleTextColor(color(R.color.text_white))
+        setSubtitle(R.string.subtitle_vertical)
+        setSubtitleTextColor(color(R.color.text_white))
+        setNavigationIcon(R.drawable.baseline_arrow_back_24)
+    }
+
+    val mAdapter by lazy { VerticalListViewAdapter(DemoDataProvider.itemList.toMutableList()) }
 
     override val root: View
-        get() = recyclerView {
+        get() = verticalLayout {
+            add(toolbar, lParams(width = matchParent) { })
 
-            adapter = mAdapter
-            layoutManager = mAdapter.layoutManager
-            val divider = DividerItemDecoration(context, DividerItemDecoration.VERTICAL)
-            //设置1dp高的分割线
-            divider.setDrawable(
-                shape(
-                    solidColorRes = R.color.split_grey,
-                    sizeHeight = dp(1),
-                    marginStart = dp(16),
-                    marginEnd = dp(16)
+            add(recyclerView {
+                isVerticalScrollBarEnabled = false
+                adapter = mAdapter
+                layoutManager = mAdapter.layoutManager
+                val divider = DividerItemDecoration(context, DividerItemDecoration.VERTICAL)
+                //设置1dp高的分割线
+                divider.setDrawable(
+                    shape(
+                        solidColorRes = R.color.split_grey,
+                        sizeHeight = dp(1),
+                        marginStart = dp(16),
+                        marginEnd = dp(16)
+                    )
                 )
-            )
-            addItemDecoration(divider)
+                addItemDecoration(divider)
+            }, lParams(width = matchParent) { })
         }
 }
 

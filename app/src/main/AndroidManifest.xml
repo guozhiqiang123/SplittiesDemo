@@ -17,6 +17,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".home.vertical.VerticalListViewActivity" />
+        <activity android:name=".home.horizontal.HorizontalListViewActivity" />
     </application>
 
 </manifest>

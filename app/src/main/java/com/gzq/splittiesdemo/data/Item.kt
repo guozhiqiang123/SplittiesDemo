@@ -5,5 +5,6 @@ data class Item(
     val title: String,
     val subtitle: String,
     val imageId: Int,
-    val source: String = "demo source"
+    val source: String = "demo source",
+    val isLike: Boolean = false
 )

@@ -29,5 +29,8 @@ class VerticalListViewActivity : BaseActivity() {
             }
         })
 
+        ui.toolbar.setNavigationOnClickListener {
+            super.onBackPressed()
+        }
     }
 }

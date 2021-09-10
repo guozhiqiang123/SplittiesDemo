@@ -8,4 +8,8 @@
     <string name="title_template">Template</string>
     <string name="menu_dark_light">DarkLight</string>
     <string name="menu_palette">Palette</string>
+    <string name="list_view">ListView</string>
+    <string name="subtitle_vertical">vertical</string>
+    <string name="subtitle_horizontal">horizontal</string>
+    <string name="good_food">Good Food</string>
 </resources>
