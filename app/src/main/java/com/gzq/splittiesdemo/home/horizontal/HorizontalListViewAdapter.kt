@@ -1,8 +1,6 @@
 package com.gzq.splittiesdemo.home.horizontal
 
 import android.view.ViewGroup
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
@@ -11,7 +9,6 @@ import com.gzq.splittiesdemo.data.DemoDataProvider
 import com.gzq.splittiesdemo.data.Item
 import splitties.dimensions.dp
 import splitties.init.appCtx
-import splitties.views.dsl.recyclerview.horizontalListLayoutParams
 import splitties.views.recyclerview.horizontalLayoutManager
 
 /**
@@ -28,7 +25,7 @@ class HorizontalListViewAdapter : BaseQuickAdapter<Item, BaseViewHolder>(
     val layoutManager = horizontalLayoutManager()
 
     override fun onCreateDefViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder {
-        return MyViewHolder(HorizontalListItemUi(parent.context), layoutManager)
+        return MyViewHolder(HorizontalListItemUi(parent.context))
     }
 
     override fun convert(holder: BaseViewHolder, item: Item) {
@@ -37,15 +34,15 @@ class HorizontalListViewAdapter : BaseQuickAdapter<Item, BaseViewHolder>(
     }
 
     class MyViewHolder(
-        val ui: HorizontalListItemUi,
-        layoutManager: LinearLayoutManager
+        val ui: HorizontalListItemUi
     ) : BaseViewHolder(ui.root) {
         init {
-            itemView.layoutParams =
-                RecyclerView.LayoutParams(
-                    appCtx.dp(280),
-                    RecyclerView.LayoutParams.WRAP_CONTENT
-                )
+            val layoutParams = RecyclerView.LayoutParams(
+                appCtx.dp(280),
+                appCtx.dp(200)
+            )
+            layoutParams.setMargins(appCtx.dp(16), appCtx.dp(16), 0, appCtx.dp(16))
+            itemView.layoutParams = layoutParams
         }
     }
 }

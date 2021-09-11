@@ -4,7 +4,7 @@ import android.content.Context
 import android.view.View
 import android.widget.ImageView
 import com.gzq.splittiesdemo.R
-import com.gzq.splittiesdemo.common.corner4ImageView
+import com.gzq.splittiesdemo.common.shapeImageView
 import com.gzq.splittiesdemo.data.Item
 import splitties.dimensions.dp
 import splitties.resources.color
@@ -16,7 +16,7 @@ import splitties.views.padding
  * VerticalList-小图模式
  */
 class VerticalListItemSmallImageUi(override val ctx: Context) : Ui {
-    private val corner4Image = corner4ImageView() {
+    private val corner4Image = shapeImageView(allCorner = 4) {
         scaleType = ImageView.ScaleType.CENTER_CROP
     }
 

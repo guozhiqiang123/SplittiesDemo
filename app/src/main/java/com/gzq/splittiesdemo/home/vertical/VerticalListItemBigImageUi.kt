@@ -5,7 +5,7 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
 import com.gzq.splittiesdemo.R
-import com.gzq.splittiesdemo.common.corner4ImageView
+import com.gzq.splittiesdemo.common.shapeImageView
 import com.gzq.splittiesdemo.data.Item
 import splitties.dimensions.dp
 import splitties.views.dsl.core.*
@@ -16,7 +16,7 @@ import splitties.views.selectable.SelectableLinearLayout
  * VerticalList-大图模式
  */
 class VerticalListItemBigImageUi(override val ctx: Context) : Ui {
-    private val corner4Image = corner4ImageView() {
+    private val corner4Image = shapeImageView(allCorner = 4) {
         scaleType = ImageView.ScaleType.CENTER_CROP
     }
 

@@ -3,6 +3,7 @@ package com.gzq.splittiesdemo.home.horizontal
 import android.os.Bundle
 import com.gzq.splittiesdemo.common.BaseActivity
 import splitties.checkedlazy.mainThreadLazy
+import splitties.toast.toast
 import splitties.views.dsl.core.setContentView
 
 /**
@@ -18,5 +19,13 @@ class HorizontalListViewActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(ui)
+
+        ui.mAdapter.setOnItemClickListener { _, _, position ->
+            toast(position.toString())
+        }
+
+        ui.toolbar.setNavigationOnClickListener {
+            super.onBackPressed()
+        }
     }
 }

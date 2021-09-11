@@ -10,15 +10,16 @@ import androidx.core.view.doOnPreDraw
 import com.google.android.material.imageview.ShapeableImageView
 import com.google.android.material.shape.ShapeAppearanceModel
 import com.gzq.splittiesdemo.R
+import com.gzq.splittiesdemo.function.Dp
 import splitties.dimensions.dp
+import splitties.experimental.InternalSplittiesApi
 import splitties.resources.appColor
-import splitties.resources.colorSL
 import splitties.views.dsl.appcompat.toolbar
 import splitties.views.dsl.core.NO_THEME
 import splitties.views.dsl.core.Ui
 import splitties.views.dsl.core.textView
+import splitties.views.dsl.core.view
 import splitties.views.dsl.material.shapeableImageView
-import kotlin.OptIn
 import kotlin.contracts.ExperimentalContracts
 import kotlin.contracts.InvocationKind
 import kotlin.contracts.contract
@@ -113,16 +114,63 @@ inline fun Ui.mediumTextView(
 /**
  * 4dp圆角ImageView
  */
-inline fun Ui.corner4ImageView(
+inline fun Ui.shapeImageView(
     @IdRes id: Int = View.NO_ID,
     @StyleRes theme: Int = NO_THEME,
+    @Dp allCorner: Int = 0,
+    @Dp topStart: Int = 0,
+    @Dp topEnd: Int = 0,
+    @Dp bottomStart: Int = 0,
+    @Dp bottomEnd: Int = 0,
     initView: ShapeableImageView.() -> Unit = {}
 ): ShapeableImageView {
     contract { callsInPlace(initView, InvocationKind.EXACTLY_ONCE) }
     return shapeableImageView(id, theme) {
         shapeAppearanceModel = ShapeAppearanceModel.Builder()
-            .setAllCornerSizes(dp(4F))
+            .setTopLeftCornerSize(dp(allCorner or topStart).toFloat())
+            .setTopRightCornerSize(dp(allCorner or topEnd).toFloat())
+            .setBottomLeftCornerSize(dp(allCorner or bottomStart).toFloat())
+            .setBottomRightCornerSize(dp(allCorner or bottomEnd).toFloat())
             .build()
         initView.invoke(this)
     }
+}
+
+/**
+ * 提供View初始化的扩展 主要拥有设置分割线
+ */
+@InternalSplittiesApi
+inline fun Context.splitView(
+    @IdRes id: Int = View.NO_ID,
+    @StyleRes theme: Int = NO_THEME,
+    initView: View.() -> Unit = {}
+): View {
+    contract { callsInPlace(initView, InvocationKind.EXACTLY_ONCE) }
+    return view(id, theme, initView)
+}
+
+/**
+ * 提供View初始化的扩展 主要拥有设置分割线
+ */
+@InternalSplittiesApi
+inline fun View.splitView(
+    @IdRes id: Int = View.NO_ID,
+    @StyleRes theme: Int = NO_THEME,
+    initView: View.() -> Unit = {}
+): View {
+    contract { callsInPlace(initView, InvocationKind.EXACTLY_ONCE) }
+    return context.splitView(id, theme, initView)
+}
+
+/**
+ * 提供View初始化的扩展 主要拥有设置分割线
+ */
+@InternalSplittiesApi
+inline fun Ui.splitView(
+    @IdRes id: Int = View.NO_ID,
+    @StyleRes theme: Int = NO_THEME,
+    initView: View.() -> Unit = {}
+): View {
+    contract { callsInPlace(initView, InvocationKind.EXACTLY_ONCE) }
+    return ctx.splitView(id, theme, initView)
 }

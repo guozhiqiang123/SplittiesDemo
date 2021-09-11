@@ -2,7 +2,10 @@ package com.gzq.splittiesdemo.home.horizontal
 
 import android.content.Context
 import android.view.View
+import com.chad.library.adapter.base.BaseBinderAdapter
 import com.gzq.splittiesdemo.R
+import com.gzq.splittiesdemo.common.splitView
+import com.gzq.splittiesdemo.data.DemoDataProvider
 import splitties.dimensions.dp
 import splitties.resources.color
 import splitties.resources.str
@@ -10,8 +13,8 @@ import splitties.views.backgroundColor
 import splitties.views.dsl.appcompat.toolbar
 import splitties.views.dsl.core.*
 import splitties.views.dsl.recyclerview.recyclerView
-import splitties.views.padding
 import splitties.views.recyclerview.horizontalLayoutManager
+import splitties.views.setPaddingDp
 
 /**
  *date：2021/9/10 下午9:54
@@ -33,16 +36,39 @@ class HorizontalListViewUi(override val ctx: Context) : Ui {
 
     val mAdapter = HorizontalListViewAdapter()
 
+    val avatarAdapter = BaseBinderAdapter(list = DemoDataProvider.tweetList.toMutableList()).apply {
+        addItemBinder(HorizontalAvatarItemBinder())
+    }
+
     override val root: View
         get() = verticalLayout {
             add(toolbar, lParams(width = matchParent) { })
             add(textView(theme = R.style.tv_normal_16sp_grey) {
-                padding = dp(16)
+                setPaddingDp(start = 16, end = 16, top = 16)
                 text = str(R.string.good_food)
             }, lParams { })
             add(recyclerView {
+                isHorizontalScrollBarEnabled = false
                 layoutManager = mAdapter.layoutManager
                 adapter = mAdapter
             }, lParams(width = matchParent) { })
+
+            //分割线
+            add(splitView {
+                setBackgroundColor(color(R.color.split_grey))
+            }, lParams(matchParent, dp(1)) {
+                startMargin = dp(16)
+                endMargin = dp(16)
+            })
+            add(textView(theme = R.style.tv_normal_16sp_grey) {
+                text = "Stories"
+            }, lParams { })
+
+            //人物头像
+            add(recyclerView {
+                isHorizontalScrollBarEnabled = false
+                layoutManager = horizontalLayoutManager()
+                adapter = avatarAdapter
+            }, lParams(matchParent,dp(80)) { })
         }
 }
