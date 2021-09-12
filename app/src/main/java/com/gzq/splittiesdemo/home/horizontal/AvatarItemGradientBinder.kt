@@ -13,21 +13,22 @@ import splitties.init.appCtx
  *date：2021/9/11 上午11:00
  *coder：gzq
  *email：guozhiqiang@zlketang.com
- *description:
+ *description:渐变描边头像Binder
  */
-
-class HorizontalAvatarItemBinder :
-    BaseItemBinder<Tweet, HorizontalAvatarItemBinder.MyViewHolder>() {
+@Deprecated(message = "不适合使用这种方式")
+class AvatarItemGradientBinder :
+    BaseItemBinder<Tweet, AvatarItemGradientBinder.MyViewHolder>() {
 
     override fun convert(holder: MyViewHolder, data: Tweet) {
         holder.ui.renderUi(data)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        return MyViewHolder(HorizontalListAvatarItemUi((parent.context)))
+
+        return MyViewHolder(AvatarItemUiGradient((parent.context)))
     }
 
-    class MyViewHolder(val ui: HorizontalListAvatarItemUi) : BaseViewHolder(ui.root) {
+    class MyViewHolder(val ui: AvatarItemUiGradient) : BaseViewHolder(ui.root) {
         init {
             val layoutParams = RecyclerView.LayoutParams(appCtx.dp(60), appCtx.dp(60))
             layoutParams.leftMargin = appCtx.dp(12)

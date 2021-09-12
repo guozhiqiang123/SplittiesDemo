@@ -22,6 +22,13 @@
         <item name="android:textColor">@color/text_grey</item>
     </style>
 
+    <style name="tv_medium_14sp_black">
+        <item name="fontFamily">sans-serif-medium</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/text_black</item>
+    </style>
+
     <style name="tv_medium_20sp_black">
         <item name="fontFamily">sans-serif-medium</item>
         <item name="android:fontFamily">sans-serif-medium</item>

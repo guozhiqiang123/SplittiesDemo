@@ -2,6 +2,8 @@ package com.gzq.splittiesdemo.home.horizontal
 
 import android.os.Bundle
 import com.gzq.splittiesdemo.common.BaseActivity
+import com.gzq.splittiesdemo.data.Tweet
+import com.gzq.splittiesdemo.function.ItemClick
 import splitties.checkedlazy.mainThreadLazy
 import splitties.toast.toast
 import splitties.views.dsl.core.setContentView
@@ -27,5 +29,10 @@ class HorizontalListViewActivity : BaseActivity() {
         ui.toolbar.setNavigationOnClickListener {
             super.onBackPressed()
         }
+        ui.avatarAdapter.setOnItemClickListener(object : ItemClick<Tweet> {
+            override fun onItemClick(position: Int, itemData: Tweet) {
+                toast("$position->${itemData.author}")
+            }
+        })
     }
 }

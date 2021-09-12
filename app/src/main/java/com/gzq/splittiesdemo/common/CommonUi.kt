@@ -112,7 +112,7 @@ inline fun Ui.mediumTextView(
 }
 
 /**
- * 4dp圆角ImageView
+ * 圆角ImageView
  */
 inline fun Ui.shapeImageView(
     @IdRes id: Int = View.NO_ID,

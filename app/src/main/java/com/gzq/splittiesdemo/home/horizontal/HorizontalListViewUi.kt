@@ -13,6 +13,7 @@ import splitties.views.backgroundColor
 import splitties.views.dsl.appcompat.toolbar
 import splitties.views.dsl.core.*
 import splitties.views.dsl.recyclerview.recyclerView
+import splitties.views.padding
 import splitties.views.recyclerview.horizontalLayoutManager
 import splitties.views.setPaddingDp
 
@@ -36,9 +37,11 @@ class HorizontalListViewUi(override val ctx: Context) : Ui {
 
     val mAdapter = HorizontalListViewAdapter()
 
-    val avatarAdapter = BaseBinderAdapter(list = DemoDataProvider.tweetList.toMutableList()).apply {
-        addItemBinder(HorizontalAvatarItemBinder())
-    }
+    //    val avatarAdapter = BaseBinderAdapter(list = DemoDataProvider.tweetList.toMutableList()).apply {
+//        addItemBinder(AvatarItemSolidBinder())
+//        addItemBinder(AvatarItemGradientBinder())
+//    }
+    val avatarAdapter = AvatarItemAdapter(DemoDataProvider.tweetList.toMutableList())
 
     override val root: View
         get() = verticalLayout {
@@ -61,6 +64,7 @@ class HorizontalListViewUi(override val ctx: Context) : Ui {
                 endMargin = dp(16)
             })
             add(textView(theme = R.style.tv_normal_16sp_grey) {
+                padding=dp(16)
                 text = "Stories"
             }, lParams { })
 
@@ -69,6 +73,8 @@ class HorizontalListViewUi(override val ctx: Context) : Ui {
                 isHorizontalScrollBarEnabled = false
                 layoutManager = horizontalLayoutManager()
                 adapter = avatarAdapter
-            }, lParams(matchParent,dp(80)) { })
+            }, lParams(matchParent, dp(80)) {
+
+            })
         }
 }

@@ -61,7 +61,10 @@ fun shape(
     @Px marginTop: Int = 0,
     @Px marginBottom: Int = 0,
     @Px sizeWidth: Int = 0,
-    @Px sizeHeight: Int = 0
+    @Px sizeHeight: Int = 0,
+    @ColorInt gradientColors: IntArray? = null,
+    gradientType: Int = GradientDrawable.LINEAR_GRADIENT,
+    gradientOffset: FloatArray? = null
 ): Drawable {
     val drawable = PaddingGradientDrawable().apply {
         shape = shapeValue
@@ -88,6 +91,8 @@ fun shape(
             padding or paddingBottom
         )
         setSize(sizeWidth, sizeHeight)
+        setGradientType(gradientType)
+        setColors(gradientColors,gradientOffset)
     }
     if (margin and marginStart and marginEnd and marginTop and marginBottom == 0) {
         return InsetDrawable(

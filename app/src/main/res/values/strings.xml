@@ -11,5 +11,6 @@
     <string name="list_view">ListView</string>
     <string name="subtitle_vertical">vertical</string>
     <string name="subtitle_horizontal">horizontal</string>
+    <string name="subtitle_grid">grid</string>
     <string name="good_food">Good Food</string>
 </resources>
