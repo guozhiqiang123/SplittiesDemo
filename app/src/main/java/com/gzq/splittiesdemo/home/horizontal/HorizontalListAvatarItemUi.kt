@@ -81,6 +81,7 @@ class AvatarItemUiGradient(val context: Context) : HorizontalListAvatarItemUi(co
                         Color.parseColor("#FFFCAF45")
                     ),
                     gradientType = GradientDrawable.LINEAR_GRADIENT,
+                    gradientOrientation = GradientDrawable.Orientation.TL_BR,
                     gradientOffset = floatArrayOf(0f, 0f, 100f, 100f)
                 )
                 add(avatar, lParams(width = dp(52), height = dp(52)) { })

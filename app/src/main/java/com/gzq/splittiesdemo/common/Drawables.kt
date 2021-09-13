@@ -63,6 +63,7 @@ fun shape(
     @Px marginBottom: Int = 0,
     @Px sizeWidth: Int = 0,
     @Px sizeHeight: Int = 0,
+    gradientOrientation: GradientDrawable.Orientation = GradientDrawable.Orientation.TOP_BOTTOM,
     @ColorInt gradientColors: IntArray? = null,
     gradientType: Int = GradientDrawable.LINEAR_GRADIENT,
     gradientOffset: FloatArray? = null
@@ -92,6 +93,7 @@ fun shape(
             padding or paddingBottom
         )
         setSize(sizeWidth, sizeHeight)
+        orientation = gradientOrientation
         setGradientType(gradientType)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
             setColors(gradientColors, gradientOffset)
