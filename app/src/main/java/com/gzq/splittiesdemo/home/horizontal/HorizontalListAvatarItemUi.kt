@@ -33,8 +33,8 @@ class AvatarItemUiSolid(val context: Context) : HorizontalListAvatarItemUi(conte
         setStrokeColorResource(R.color.green_500)
         //超过4dp则必须设置padding，否则画笔一半绘制在边框之外
         //经常玩自定义的同学应该懂
-        strokeWidth = dp(4f)
-        setContentPadding(dp(2), dp(2), dp(2), dp(2))
+        strokeWidth = dp(3f)
+        setContentPadding(dp(1.5f).toInt(), dp(1.5f).toInt(), dp(1.5f).toInt(), dp(1.5f).toInt())
         scaleType = ImageView.ScaleType.CENTER_CROP
         //菱形：CutCornerTreatment()；圆角：RoundedCornerTreatment()；
         shapeAppearanceModel =
@@ -84,7 +84,7 @@ class AvatarItemUiGradient(val context: Context) : HorizontalListAvatarItemUi(co
                     gradientOrientation = GradientDrawable.Orientation.TL_BR,
                     gradientOffset = floatArrayOf(0f, 0f, 100f, 100f)
                 )
-                add(avatar, lParams(width = dp(52), height = dp(52)) { })
+                add(avatar, lParams(width = dp(54), height = dp(54)) { })
             }, lParams(width = dp(60), height = dp(60)))
             add(auth, lParams())
         }
