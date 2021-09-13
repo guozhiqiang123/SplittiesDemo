@@ -7,6 +7,7 @@ import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.GradientDrawable.RECTANGLE
 import android.graphics.drawable.InsetDrawable
 import android.graphics.drawable.StateListDrawable
+import android.os.Build
 import androidx.annotation.*
 import androidx.annotation.IntRange
 import com.gzq.splittiesdemo.ext.PaddingGradientDrawable
@@ -92,7 +93,11 @@ fun shape(
         )
         setSize(sizeWidth, sizeHeight)
         setGradientType(gradientType)
-        setColors(gradientColors,gradientOffset)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            setColors(gradientColors, gradientOffset)
+        } else {
+            colors = gradientColors
+        }
     }
     if (margin and marginStart and marginEnd and marginTop and marginBottom == 0) {
         return InsetDrawable(

@@ -51,7 +51,8 @@ class GridListAdapter(
 
     class ImageViewHolder(val ui: GridItemImageUi) : RecyclerView.ViewHolder(ui.root) {
         init {
-            val mLayoutManager = RecyclerView.LayoutParams(appCtx.dp(190), appCtx.dp(220))
+            val mLayoutManager =
+                RecyclerView.LayoutParams(RecyclerView.LayoutParams.MATCH_PARENT, appCtx.dp(220))
             mLayoutManager.margin = itemView.context.dp(8)
             itemView.layoutParams = mLayoutManager
         }
