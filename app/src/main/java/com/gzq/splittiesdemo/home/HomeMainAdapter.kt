@@ -90,27 +90,3 @@ class HomeMainAdapter : RecyclerView.Adapter<HomeMainAdapter.MyViewHolder>() {
         }
     }
 }
-
-/**
- * Item的布局
- */
-class HomeMainItemUi(
-    context: Context,
-    attrs: AttributeSet? = null,
-    defStyleAttr: Int = 0
-) : SelectableConstraintLayout(context, attrs, defStyleAttr) {
-
-    val textView = mediumTextView {
-        textSize = 14f
-        setTextColor(color(R.color.text_white))
-    }
-
-    init {
-        background = shape(solidColorRes = R.color.green_500, radius = dp(4F))
-        add(textView, lParams(width = wrapContent, height = wrapContent) {
-            centerInParent()
-            setPaddingDp(top = 12, bottom = 12)
-        })
-    }
-
-}
